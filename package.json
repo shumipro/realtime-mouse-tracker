@@ -1,7 +1,7 @@
 {
   "name": "realtime-mouse-tracker",
-  "version": "0.0.6",
-  "description": "Real time mouse tracker",
+  "version": "0.0.1",
+  "description": "Realtime Mouse Tracker",
   "main": "dist/tracker.js",
   "scripts": {
     "start": "./node_modules/.bin/gulp",
