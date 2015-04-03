@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mouse Tracker Beacon</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="./examples.css">
+</head>
+<body>
+    <header>Mouse Tracker Beacon Exmaple</header>
+    <div id="output" class="output"></div>
+    <footer>
+        <div>Design and Implemented by Dev Morning</div>
+    </footer>
+    <script src="../dist/tracker.js"></script>
+    <script>
+        var count = 0;
+        console.log = function(obj) {
+            var div = document.createElement('DIV');
+            div.innerHTML = count +  ': ' + JSON.stringify(obj) + '<br>';
+            var output = document.getElementById('output');
+            output.insertBefore(div, output.firstChild);
+            count++;
+        }
+    </script>
+</body>
+</html>
