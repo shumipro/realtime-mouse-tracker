@@ -1,6 +1,6 @@
 import util from './util'
 
-var INTERVAL = window.RMT_INTERVAL || 500,
+var INTERVAL = window.RMT_INTERVAL || 100,
     API_PATH = window.RMT_API_PATH || 'http://localhost/track/?'
 
 var onLoadTime = new Date().getTime()
@@ -33,7 +33,7 @@ var send = (x, y) => {
         return
     }
     // create a image as a beacon
-    beacon(API_PATH + 'x=' + x + '&y=' + y + '&t=' + onLoadTime)
+    beacon(API_PATH + 'x=' + x + '&y=' + y + '&t=' + onLoadTime + '&url=' + location.href)
 }
 
 var beacon = (() => {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+  <head>
+    <meta charset="UTF-8">
+    <title>Socket.IO Client Example</title>
+    <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+    <script type="text/javascript">
+
+    var DISPLAY_COUNT = 40;
+    var COLORS = ['aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'];
+
+    var socket = io.connect('http://192.168.0.110:3001/');
+
+    socket.on('connect', function(msg) {
+      console.log("connet");
+    });
+
+    var divList = [];
+
+    socket.on('data', function(value) {
+      var data = value.split("&"),
+        t = data[0],
+        x = data[1],
+        y = data[2];
+      var color = COLORS[t % COLORS.length];
+      // console.log(data);
+      var div = document.createElement('DIV');
+      div.style.width = "8px";
+      div.style.height = "8px";
+      div.style.backgroundColor = color;
+      div.style.position = "absolute";
+      div.style.left = x + "px";
+      div.style.top = y + "px";
+      var output = document.getElementById("receiveMsg");
+      output.appendChild(div);
+      divList.push(div);
+      if(divList.length > DISPLAY_COUNT) {
+        output.removeChild(output.firstChild);
+      }
+    });
+
+    function emit() {
+      socket.emit('url', { value: document.getElementById("url").value });
+    }
+
+    function disconnect() {
+      socket.disconnect();
+    }
+    </script>
+  </head>
+  <body style="width: 100%; height: 100%;">
+  <iframe src="http://www.tejitak.com/lunch/" style="width: 100%; height: 100%;"></iframe>
+  <div style="position: absolute; top: 0; left: 0;">
+    <h1>socket.io sample</h1>
+    <div id="connectId"></div>
+    <div id="type"></div>
+    <br>
+    <input type="text" id="url" value="http://192.168.0.105:8080/examples/tracker.html">
+    <input type="button" value="メッセージを送る" onclick="emit()">
+    <input type="button" value="切断する" onclick="disconnect()">
+    <div id="receiveMsg"></div>
+  </div>
+  </body>
+</html>
